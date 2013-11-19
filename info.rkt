@@ -1,8 +1,6 @@
 #lang setup/infotab
 
-(define collection "sexp-diff")
-
-(define scribblings '(["sexp-diff.scrbl" () (library)]))
+(define collection 'multi)
 
 (define deps '("base"))
 (define build-deps '("scribble-lib"))
