@@ -1,14 +1,17 @@
 #lang scribble/doc
 
-@(require planet/scribble planet/version scribble/eval scribble/manual)
+@(require scribble/eval scribble/manual)
 
 @(define the-eval
   (let ([the-eval (make-base-eval)])
-    (the-eval `(require (planet ,(this-package-version-symbol))))
+    (the-eval '(require sexp-diff))
     the-eval))
 
+@begin[(require (for-label sexp-diff))]
+@(declare-exporting sexp-diff)
+
 @title[#:tag "top"]{sexp-diff}
-@author+email["Vincent St-Amour" "stamourv@ccs.neu.edu"]
+@author+email["Vincent St-Amour" "stamourv@racket-lang.org"]
 
 This package provides an S-expression-aware diffing tool based on
 Levenshtein-like tree edit distance.
