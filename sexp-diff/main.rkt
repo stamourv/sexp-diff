@@ -86,20 +86,20 @@
         [(insertion-record? record) (insertion-record-change record)]
         [(compound-record?  record) (compound-record-changes record)]))
 
-(define (render-difference record)
+(define (render-difference record old-marker new-marker)
   (cond [(insertion-record? record)
-         (list '#:new (insertion-record-change record))]
+         (list new-marker (insertion-record-change record))]
         [(deletion-record? record)
-         (list '#:old (deletion-record-change record))]
+         (list old-marker (deletion-record-change record))]
         [(update-record? record)
-         (list '#:old (update-record-old record) 
-               '#:new (update-record-new record))]
+         (list old-marker (update-record-old record) 
+               new-marker (update-record-new record))]
         [(unchanged-record? record)
          (list (unchanged-record-change record))]
         [(compound-record? record)
          (list (for/fold ((res '()))
                    ((r (reverse (compound-record-changes record))))
-                 (append res (render-difference r))))]))
+                 (append res (render-difference r old-marker new-marker))))]))
 
 ;; Returns record with minimum edit distance.
 (define (min/edit record . records)
@@ -152,5 +152,8 @@
 ;; Computes a diff between OLD-TREE and NEW-TREE which minimizes the
 ;; number of atoms in the result tree, also counting inserted edit conditionals
 ;; #:new, #:old.
-(define (sexp-diff old-tree new-tree)
-  (render-difference (levenshtein-tree-edit old-tree new-tree)))
+(define (sexp-diff old-tree new-tree
+                   #:old-marker [old-marker '#:old]
+                   #:new-marker [new-marker '#:new])
+  (render-difference (levenshtein-tree-edit old-tree new-tree)
+                     old-marker new-marker))
