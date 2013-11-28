@@ -35,7 +35,7 @@
 ;;   LIFL - UMR CNRS 8022 - Université Lille 1
 ;;   59 655 Villeneuve d'Ascq cedex, France
 ;;   Helene.Touzet@lifl.fr
-;; * Format for reporting differences in improper lists is klunky
+;; * Format for reporting differences in improper lists is clunky
 
 
 ;;; Code:
