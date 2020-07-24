@@ -187,16 +187,14 @@
          (quasisyntax/loc (unchanged-record-change record)
            (#,(unchanged-record-change record)))]
         [(compound-stx-record? record)
-         (assign-props
-          (compound-stx-record-props record)
-          (quasisyntax/loc (compound-stx-record-srcloc record)
-            (#,(for/fold ((res '()))
-                         ((r (reverse (compound-record-changes record))))
-                 (let ([c (render-difference r old-marker new-marker)])
-                   (assign-props
-                    (compound-stx-record-props record)
-                    (quasisyntax/loc (compound-stx-record-srcloc record)
-                      (#,@res #,@c))))))))]))
+         (quasisyntax/loc (compound-stx-record-srcloc record)
+           (#,(for/fold ((res '()))
+                        ((r (reverse (compound-record-changes record))))
+                (let ([c (render-difference r old-marker new-marker)])
+                  (assign-props
+                   (compound-stx-record-props record)
+                   (quasisyntax/loc (compound-stx-record-srcloc record)
+                     (#,@res #,@c)))))))]))
 
 ;; Calculates the minimal edits needed to transform OLD-TREE into NEW-TREE.
 ;; It minimizes the number of atoms in the result tree, also counting
