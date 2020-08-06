@@ -1,7 +1,6 @@
 #lang scribble/doc
 
 @(require
-  scribble/example
   scribble/manual
   (for-label
    racket/base
@@ -83,35 +82,3 @@ Levenshtein-like tree edit distance.
  then it is in essence a macro that will transformer node instead of inserting a
  a literal as a sibling in the syntax object.
  The marker procedure must return a syntax object that represents a list.
-
-@examples[#:eval the-eval
-          #:escape UNSYNTAX
-          #:preserve-source-locations
-          (stx-diff
-           #'(define (f x) (+ (* x 2) 1))
-           #'(define (f x) (- (* x 2) 3 1)))
-          (stx-diff
-           #'(define (f x) (+ (* x 2) 4 1))
-           #'(define (f x) (- (* x 2) 5 3 1)))
-          #;(stx-diff
-           #:old-marker (lambda (x) #`((highlight:old #,x)))
-           #:new-marker (lambda (x) #`((highlight:new #,x)))
-           #'(1 2 3 4)
-           #'(1 2 2 4))
-           (stx-diff
-            #'((1) 2 3 4)
-            #'([1] 2 2 4))
-           (define x1 #'((1) 2 3 4))
-           (define x2 #'([1] 2 2 4))
-           x1
-           x2
-           (syntax-parse (stx-diff x1 x2)
-             [((any ...))
-              (map (lambda (x)
-                     (format "~a:~a" (syntax-line x) (syntax-column x)))
-                   (attribute any))])
-           (syntax-parse (stx-diff x1 x2)
-             [((head any ...))
-              (syntax-property #'head 'paren-shape)])
-           ]
-}
