@@ -1,6 +1,7 @@
 #lang scribble/doc
 
 @(require
+  scribble/eval
   scribble/manual
   (for-label
    racket/base
