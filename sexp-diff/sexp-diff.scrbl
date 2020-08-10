@@ -82,3 +82,4 @@ Levenshtein-like tree edit distance.
  then it is in essence a macro that will transformer node instead of inserting a
  a literal as a sibling in the syntax object.
  The marker procedure must return a syntax object that represents a list.
+}
