@@ -2,6 +2,7 @@ sexp-diff
 =========
 
 diffs s-expressions based on Levenshtein-like edit distance.
+
 Ported more or less directly from Michael Weber's Common Lisp implementation.
 
 To install: `raco pkg install sexp-diff`
