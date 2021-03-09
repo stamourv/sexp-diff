@@ -4,4 +4,4 @@
 
 (define collection 'multi)
 
-(define deps '("base" "rackunit-lib"))
+(define deps '("base" "rackunit-lib" "sexp-diff-lib"))
